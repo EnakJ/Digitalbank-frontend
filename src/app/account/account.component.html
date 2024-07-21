@@ -1,0 +1,65 @@
+<div class="container row offset-1 my-3">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h4 class="text-white fs-6 text-center">Rechercher un compte</h4>
+      </div>
+      <div class="card-body">
+<!--        <div *ngIf="accountFormGroup.value.accountId as id">{{id}}</div>-->
+        <form [formGroup]="accountFormGroup">
+          <div class="input-group">
+            <label class="input-group-text text-info">Account ID </label>
+            <input formControlName="accountId" class="form-control" placeholder="accountId...">
+            <button (click)="searcheAccount()" class="btn btn-info" >
+              <i class="bi bi-search text-white"></i>
+            </button>
+          </div>
+        </form>
+        <h4 class="border border-info my-3 w-100"></h4>
+        <div class="my-3">
+          <ng-container *ngIf="accountDetailsObservable | async as accountDetails">
+            <h5 class="fw-bold text-body-tertiary text-center">Account détails</h5>
+            <div class="shadow-sm bg-light row py-1 mx-1">
+              <label class="col-md-2 fw-bold text-body-tertiary fs-5">ID :</label>
+              <label class="col-md-8 offset-2 fw-light text-secondary-emphasis fs-6">{{accountDetails.id}}</label>
+            </div>
+            <div class="shadow-sm bg-light row py-1 mx-1">
+              <label class="col-md-4 fw-bold text-body-tertiary fs-5 ">BALANCE :</label>
+              <label class="col-md-4 offset-4 fw-light text-secondary-emphasis fs-6">{{accountDetails.balance | number : '1.2-3'}} F CFA</label>
+            </div>
+            <h4 class="border border-info my-3 w-100"></h4>
+            <div class="shadow-sm bg-light">
+              <h5 class="fw-bold text-body-tertiary text-center">Opérations</h5>
+                <table class="table table-striped table-hover bg-light">
+                  <thead>
+                      <tr class="text-end">
+                        <th class="text-body-tertiary">ID</th><th class="text-body-tertiary">TYPE</th><th class="text-body-tertiary">AMOUNT (CFA)</th><th class="text-body-tertiary">DATE</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="text-end" *ngFor="let operation of accountDetails.operationDTOList">
+                        <td>{{operation.id}}</td>
+                        <td>{{operation.type}}</td>
+                        <td>{{operation.amount | number : '1.2-3'}}</td>
+                        <td>{{operation.date | date : 'dd-MM-yyyy : HH:mm:ss'}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+              <div class="py-2 mx-1 shadow-sm">
+                <ul class="nav nav-pills">
+                  <li *ngFor="let item of [].constructor(accountDetails.totalPages); let page=index">
+                    <a (click)="goToPage(page)" [class]="this.currentPage == page ?'btn btn-info text-white':
+                      'btn btn-outline-info text-info'">{{page+1}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>

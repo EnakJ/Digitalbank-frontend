@@ -1,0 +1,47 @@
+<div class="container">
+  <ng-container *ngIf="customers | async as listCustomer; else failurOrLoading">
+    <div class="card mt-2 mx-3">
+      <div class="card-header bg-info p-0">
+        <h4 class="text-white text-center">Customers</h4>
+      </div>
+      <div class="card-body" style="background-color: aliceblue">
+        <div class="container text-end m-3">
+          <input [(ngModel)]="keyword" placeholder="rechercher par mot clé.." class="form-control-sm mx-1"
+                 style="width: 35%; border: 1px solid #0dcaf0; outline: none; color: dimgrey">
+          <button type="submit" (click)="searchCustomer(keyword)" class="btn btn-sm btn-outline-info">Search</button>
+        </div>
+        <h4 class="border w-100"></h4>
+<!--        <div>{{keyword}}</div>-->
+        <table class="table table-secondary table-light table-hover">
+          <thead>
+          <tr>
+            <th>ID</th><th>Prénom</th><th>Nom</th><th>Email</th><th>Date Naissance</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let customer of customers | async">
+            <td>{{customer.id}}</td>
+            <td>{{customer.prenom}}</td>
+            <td>{{customer.nom}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{customer.naissance | date}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #failurOrLoading>
+    <ng-container *ngIf="errorMessage; else loading">
+        <div class="text-center my-5">
+         <h4 class="text-danger fs-6"> {{errorMessage | json}}</h4>
+        </div>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center my-5">
+        <h3 class="text-danger fs-3">LOADING ...</h3>
+      </div>
+    </ng-template>
+  </ng-template>
+
+</div>

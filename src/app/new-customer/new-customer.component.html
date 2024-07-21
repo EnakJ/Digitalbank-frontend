@@ -1,0 +1,66 @@
+<div class="container m-3">
+  <div class="card col-md-8 offset-3">
+    <div class="card-header bg-info text-center p-0">
+      <h4 class="text-white">
+        Nouveau customer
+      </h4>
+    </div>
+    <div class="card-body text-center">
+        <form class="form-control-sm col-md-8 offset-2" [formGroup]="customerFormGroup" (ngSubmit)="saveCustomer()">
+          <div class="form-group mb-3 text-end">
+            <label class="form-label gray1">Prénom :</label>
+            <input formControlName="prenom" class="form-control-sm input1" type="text" placeholder="Prénom...">
+            <div class="text-center">
+              <span class="text-danger error"
+                    *ngIf="this.customerFormGroup.controls['prenom'].touched &&
+                  this.customerFormGroup.controls['prenom'].errors &&
+                  this.customerFormGroup.controls['prenom'].errors['required']">
+              prénom is required !
+            </span>
+            </div>
+          </div>
+          <div class="form-group mb-3 text-end">
+            <label class="form-label gray1">Nom :</label>
+            <input formControlName="nom" class="form-control-sm input1" type="text" placeholder="Nom...">
+            <div class="text-center">
+              <span class="text-danger error"
+                    *ngIf="this.customerFormGroup.controls['nom'].touched &&
+                  this.customerFormGroup.controls['nom'].errors &&
+                  this.customerFormGroup.controls['nom'].errors['required']">
+              nom is required !
+            </span>
+            </div>
+          </div>
+          <div class="form-group mb-3 text-end">
+            <label class="form-label gray1">Email :</label>
+            <input formControlName="email" class="form-control-sm input1" type="email" placeholder="email...">
+            <div class="text-center">
+              <span class="text-danger error"
+                    *ngIf="this.customerFormGroup.controls['email'].touched &&
+                  this.customerFormGroup.controls['email'].errors &&
+                  this.customerFormGroup.controls['email'].errors['email'] &&
+                  this.customerFormGroup.controls['email'].errors['required']">
+              email is required !
+            </span>
+            </div>
+          </div>
+          <div class="form-group mb-3 text-end">
+            <label class="form-label gray1">Date naissance :</label>
+            <input formControlName="naissance" class="form-control-sm input1" type="date">
+            <div class="text-center">
+              <span class="text-danger error"
+                    *ngIf="this.customerFormGroup.controls['naissance'].touched &&
+                  this.customerFormGroup.controls['naissance'].errors &&
+                  this.customerFormGroup.controls['naissance'].errors['required']">
+              date naissane is required !
+            </span>
+            </div>
+          </div>
+          <div class="form-group my-5 text-center">
+            <button [disabled]="!this.customerFormGroup.valid" class="btn btn-info text-white mx-1" type="submit">Save</button>
+            <button class="btn btn-secondary" type="reset">Effacer</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

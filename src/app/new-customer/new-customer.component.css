@@ -1,0 +1,22 @@
+.input1{
+  width: 70%;
+  margin: 3px;
+  color: dimgrey;
+  border: 1px solid #0dcaf0;
+  outline: none;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.input1:hover{
+  box-shadow: 2px 2px 2px gray;
+}
+
+.gray1{
+  color: dimgrey;
+  text-shadow: 5px 5px 5px  gray;
+}
+
+.error{
+  font-size: 12px;
+  font-style: italic;
+}
